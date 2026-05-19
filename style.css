@@ -380,22 +380,12 @@ body.cursor-hover #cursorRing { width: 50px; height: 50px; border-color: var(--c
 .hero-portrait { flex: 0 0 auto; }
 .portrait-frame {
   position: relative;
-  padding: 14px;
-  background: var(--surf);
-  border: 1px solid var(--border);
-  box-shadow: 0 0 40px rgba(0,245,255,0.05);
+  padding: 0;
+  background: transparent;
+  border: none;
+  box-shadow: none;
 }
-.pf-corner {
-  position: absolute;
-  width: 22px; height: 22px;
-  border-color: var(--cx);
-  border-style: solid;
-  box-shadow: 0 0 8px var(--cx);
-}
-.pf-corner.tl{top:-1px;left:-1px;border-width:2px 0 0 2px}
-.pf-corner.tr{top:-1px;right:-1px;border-width:2px 2px 0 0}
-.pf-corner.bl{bottom:-1px;left:-1px;border-width:0 0 2px 2px}
-.pf-corner.br{bottom:-1px;right:-1px;border-width:0 2px 2px 0}
+.pf-corner { display: none; }
 
 .pf-scan {
   position: absolute;
@@ -414,7 +404,7 @@ body.cursor-hover #cursorRing { width: 50px; height: 50px; border-color: var(--c
 
 #matrixCanvas {
   display: block;
-  width: 360px; height: 420px;
+  width: 480px; height: 540px;
 }
 .pf-lbl {
   position: absolute;
@@ -1109,7 +1099,7 @@ em.hi { font-style: normal; color: var(--cx); }
   .about-grid,.contact-grid,.disc-grid{grid-template-columns:1fr}
   .hero-inner{flex-direction:column;text-align:center;padding-top:4rem}
   .hero-badge,.hero-btns,.hero-metrics{justify-content:center}
-  #matrixCanvas{width:280px;height:320px}
+  #matrixCanvas{width:320px;height:360px}
   .nav-links{display:none}
   .disc-cards{grid-template-columns:1fr 1fr}
 }
@@ -1117,4 +1107,3 @@ em.hi { font-style: normal; color: var(--cx); }
   .disc-cards{grid-template-columns:1fr}
   .h1r{font-size:clamp(2.5rem,10vw,4rem)}
 }
-
