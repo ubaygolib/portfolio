@@ -37,7 +37,7 @@
     damping   : 0.80,   // velocity damping
     // Richer character pool for cyber-glyph feel
     chars     : '01010110110100101010ｱｳｴｵｶｷｸｹ#@!$%&<>[]',
-    bg        : 'rgba(3,6,9,0.88)',
+    bg      : 'rgba(2,4,8,0.95)',
   };
 
   /* ── STATE ──────────────────────────────────── */
@@ -62,12 +62,21 @@
       this.char     = pickChar();
       this.charT    = (Math.random() * 80) | 0;
       this.charRate = (25 + Math.random() * 80) | 0;
-      // Colour derived from image pixel, tinted cyan
-      const t = brightness;
-      this.colorR = Math.round(r * (1 - t * 0.3) + 0   * t * 0.3);
-      this.colorG = Math.round(g * (1 - t * 0.3) + 245 * t * 0.3);
-      this.colorB = Math.round(b * (1 - t * 0.3) + 255 * t * 0.3);
-      this.alpha   = 0.18 + brightness * 0.82;
+      // Vivid matrix colour: bright=white/cyan, mid=cyan, dark=green
+      if (brightness > 0.75) {
+        this.colorR = 180 + Math.round(brightness * 75);
+        this.colorG = 240 + Math.round(brightness * 15);
+        this.colorB = 255;
+      } else if (brightness > 0.4) {
+        this.colorR = 0;
+        this.colorG = 220 + Math.round(brightness * 35);
+        this.colorB = 255;
+      } else {
+        this.colorR = 0;
+        this.colorG = 160 + Math.round(brightness * 200);
+        this.colorB = 80 + Math.round(brightness * 100);
+      }
+      this.alpha = 0.6 + brightness * 0.4;
     }
 
     update() {
@@ -100,14 +109,15 @@
 
     draw() {
       const distHome = Math.hypot(this.x - this.ox, this.y - this.oy);
-      const glow     = Math.min(distHome / 35, 1);
+      const glow     = Math.min(distHome / 40, 1);
 
-      // Scattered particles shift toward magenta/white
-      const r = Math.round(this.colorR + glow * (255 - this.colorR) * 0.6);
-      const g = Math.round(this.colorG * (1 - glow * 0.3));
-      const b = Math.round(this.colorB + glow * (255 - this.colorB) * 0.1);
+      // Scattered = bright magenta/white, at-home = vivid cyan/green
+      const r = Math.round(this.colorR + glow * (255 - this.colorR) * 0.8);
+      const g = Math.round(this.colorG * (1 - glow * 0.5) + glow * 60);
+      const b = Math.round(this.colorB * (1 - glow * 0.2) + glow * 255);
 
-      ctx.globalAlpha = this.alpha * (0.65 + glow * 0.35);
+      // Full brightness — no dim
+      ctx.globalAlpha = this.alpha;
       ctx.fillStyle = `rgb(${r},${g},${b})`;
       ctx.fillText(this.char, this.x, this.y);
     }
