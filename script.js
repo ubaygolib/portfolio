@@ -360,8 +360,9 @@
       return -(track.scrollWidth - outer.clientWidth);
     }
 
-    // Scroll-tied movement
+    // Scroll-tied movement — only when NOT dragging
     window.addEventListener('scroll', () => {
+      if (isDrag) return;
       const rect    = section.getBoundingClientRect();
       const sH      = section.offsetHeight;
       const vH      = window.innerHeight;
@@ -387,26 +388,37 @@
     outer.addEventListener('mousedown', (e) => {
       isDrag = true; dragStartX = e.clientX; dragStartTarget = targetX;
       outer.style.cursor = 'grabbing';
+      e.preventDefault();
     });
     window.addEventListener('mousemove', (e) => {
       if (!isDrag) return;
       const d = e.clientX - dragStartX;
       targetX = Math.max(maxScroll(), Math.min(0, dragStartTarget + d));
-      const pct = targetX / maxScroll();
-      if (fill) fill.style.width = ((1 - pct) * 100 * -1 + 100).toFixed(1) + '%';
+      const pct = maxScroll() !== 0 ? targetX / maxScroll() : 0;
+      if (fill) fill.style.width = (pct * 100).toFixed(1) + '%';
+      if (lbl) {
+        const ci = Math.min(Math.ceil(pct * TOTAL), TOTAL) || 1;
+        lbl.textContent = String(ci).padStart(2,'0') + ' / ' + String(TOTAL).padStart(2,'0');
+      }
     });
     window.addEventListener('mouseup', () => {
       isDrag = false; outer.style.cursor = 'grab';
     });
 
-    // Touch
+    // Touch drag
     outer.addEventListener('touchstart', (e) => {
-      dragStartX = e.touches[0].clientX; dragStartTarget = targetX;
+      isDrag = true;
+      dragStartX = e.touches[0].clientX;
+      dragStartTarget = targetX;
     }, { passive: true });
     outer.addEventListener('touchmove', (e) => {
+      if (!isDrag) return;
       const d = e.touches[0].clientX - dragStartX;
       targetX = Math.max(maxScroll(), Math.min(0, dragStartTarget + d));
+      const pct = maxScroll() !== 0 ? targetX / maxScroll() : 0;
+      if (fill) fill.style.width = (pct * 100).toFixed(1) + '%';
     }, { passive: true });
+    outer.addEventListener('touchend', () => { isDrag = false; });
 
     // 3D TILT on cards
     CARDS.forEach(card => {
