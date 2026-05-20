@@ -58,7 +58,7 @@
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
 
-   let W, H, nodes = [], edges = [], mouse = { x: 0, y: 0 };
+    let W, H, nodes = [], edges = [], mouse = { x: W/2, y: H/2 };
     const NODE_COUNT = 80;
     const CONNECT_DIST = 160;
     const MOUSE_DIST = 220;
@@ -238,11 +238,11 @@
     const el = document.getElementById('cmdType');
     if (!el) return;
     const lines = [
-      'npm run build:portfolio --prod',
-      'git commit -m "feat: ship v2.6 🚀"',
-      'python train_marathon_model.py',
-      'node agents/ubay_golib_agent.js',
-      './run_42km.sh --pace=5:30',
+      'python crm_sync.py --uysot --amocrm',
+      'git commit -m "feat: yangi loyiha qoshildi 🚀"',
+      'node agents/ubay_golib_agent.js --jonli',
+      'ai_prompt_engine.py --vazifa=optimallashtirish',
+      './marafon_42km.sh --sur-at=5:30',
     ];
     let li = 0, ci = 0, deleting = false;
 
@@ -272,37 +272,37 @@
     // All log entries — typed one by one in sequence, then loop
     const LOG = [
       { cls:'tl-dim',   text:'──────────────────────────────────' },
-      { cls:'tl-sys',   text:'[SYS_INIT]: Booting UBAY_GOLIB_AI_AGENT_v2.6...' },
-      { cls:'tl-ok',    text:'[SYS_INIT]: Kernel loaded              [OK]' },
-      { cls:'tl-ok',    text:'[SYS_INIT]: Memory allocation 512MB    [OK]' },
-      { cls:'tl-sys',   text:'[DB_INIT]: Connecting to SQLite Database...' },
-      { cls:'tl-ok',    text:'[DB_INIT]: Connection established       [OK]' },
-      { cls:'tl-sys',   text:'[DB_INIT]: Loading schema migrations...' },
-      { cls:'tl-ok',    text:'[DB_INIT]: 14 migrations applied        [OK]' },
-      { cls:'tl-agent', text:'[AI_AGENT]: Initializing Gemini API client...' },
-      { cls:'tl-ok',    text:'[AI_AGENT]: Model gemini-pro loaded     [OK]' },
-      { cls:'tl-agent', text:'[AI_AGENT]: Userbot active on Core Loop v3' },
-      { cls:'tl-agent', text:'[AI_AGENT]: Context window: 1M tokens ready' },
-      { cls:'tl-sys',   text:'[TELEGRAM]: Connecting to Bot API gateway...' },
-      { cls:'tl-ok',    text:'[TELEGRAM]: Webhook registered          [OK]' },
-      { cls:'tl-info',  text:'[MONITOR]: System health check running...' },
-      { cls:'tl-ok',    text:'[MONITOR]: CPU usage: 12% nominal       [OK]' },
-      { cls:'tl-ok',    text:'[MONITOR]: RAM usage: 38% stable        [OK]' },
-      { cls:'tl-sys',   text:'[DISC_MON]: Marathon training progress: 92%' },
-      { cls:'tl-ok',    text:'[DISC_MON]: Weekly mileage: 68 km       [OK]' },
-      { cls:'tl-agent', text:'[AI_AGENT]: Analysing run performance...' },
-      { cls:'tl-ok',    text:'[AI_AGENT]: Pace optimized: 5:28/km    [OK]' },
-      { cls:'tl-sys',   text:'[FRONTEND]: Building portfolio bundle...' },
-      { cls:'tl-ok',    text:'[FRONTEND]: WebGL shaders compiled      [OK]' },
-      { cls:'tl-ok',    text:'[FRONTEND]: Canvas particles: 4200 pts  [OK]' },
-      { cls:'tl-warn',  text:'[WARN]: High velocity detected on node 47' },
-      { cls:'tl-ok',    text:'[AGENT]: Auto-correcting trajectory     [OK]' },
-      { cls:'tl-info',  text:'[LOG]: Uptime: 99.98% — SLA maintained' },
-      { cls:'tl-agent', text:'[AI_AGENT]: Generating next sprint tasks...' },
-      { cls:'tl-ok',    text:'[AI_AGENT]: 12 tasks queued             [OK]' },
-      { cls:'tl-sys',   text:'[CRON]: Scheduled backup @ 03:00 UTC' },
-      { cls:'tl-ok',    text:'[CRON]: Job registered                 [OK]' },
-      { cls:'tl-info',  text:'[STATUS]: All systems nominal. Agent running.' },
+      { cls:'tl-sys',   text:'[TIZ_INIT]: UBAY_GOLIB_AI_AGENT_v2.6 ishga tushmoqda...' },
+      { cls:'tl-ok',    text:'[TIZ_INIT]: Yadro modullari yuklandi        [OK]' },
+      { cls:'tl-ok',    text:'[TIZ_INIT]: Xotira ajratildi 512MB          [OK]' },
+      { cls:'tl-sys',   text:'[CRM_INIT]: UYSOT tizimiga ulanilmoqda...' },
+      { cls:'tl-ok',    text:'[CRM_INIT]: Ulanish o'rnatildi              [OK]' },
+      { cls:'tl-sys',   text:'[CRM_INIT]: amoCRM integratsiyasi yuklanmoqda...' },
+      { cls:'tl-ok',    text:'[CRM_INIT]: 14 migratsiya qo'llanildi       [OK]' },
+      { cls:'tl-agent', text:'[AI_AGENT]: Gemini API mijozi ishga tushmoqda...' },
+      { cls:'tl-ok',    text:'[AI_AGENT]: gemini-pro modeli yuklandi      [OK]' },
+      { cls:'tl-agent', text:'[AI_AGENT]: Userbot asosiy siklda faol v3' },
+      { cls:'tl-agent', text:'[AI_AGENT]: Kontekst oynasi: 1M token tayyor' },
+      { cls:'tl-sys',   text:'[TELEGRAM]: Bot API shlyuziga ulanilmoqda...' },
+      { cls:'tl-ok',    text:'[TELEGRAM]: Webhook ro'yxatdan o'tdi         [OK]' },
+      { cls:'tl-info',  text:'[NAZORAT]: Tizim holati tekshirilmoqda...' },
+      { cls:'tl-ok',    text:'[NAZORAT]: CPU yuklanishi: 12% normal       [OK]' },
+      { cls:'tl-ok',    text:'[NAZORAT]: RAM yuklanishi: 38% barqaror     [OK]' },
+      { cls:'tl-sys',   text:'[INTIZOM]: Marafon trening jarayoni: 92%' },
+      { cls:'tl-ok',    text:'[INTIZOM]: Haftalik masofa: 68 km           [OK]' },
+      { cls:'tl-agent', text:'[AI_AGENT]: Yugurish natijalari tahlil qilinmoqda...' },
+      { cls:'tl-ok',    text:'[AI_AGENT]: Sur'at optimallashtirildi: 5:28/km [OK]' },
+      { cls:'tl-sys',   text:'[DIZAYN]: Portfolio bundle qurilmoqda...' },
+      { cls:'tl-ok',    text:'[DIZAYN]: Vizual shaderlar kompilyatsiya qilindi [OK]' },
+      { cls:'tl-ok',    text:'[DIZAYN]: Canvas zarrachalari: 4200 nuqta   [OK]' },
+      { cls:'tl-warn',  text:'[OGOHLANTIRISH]: 47-tugunida yuqori tezlik aniqlandi' },
+      { cls:'tl-ok',    text:'[AGENT]: Traektoriya avtomatik to'g'irlandi  [OK]' },
+      { cls:'tl-info',  text:'[LOG]: Ishlash vaqti: 99.98% — SLA saqlandi' },
+      { cls:'tl-agent', text:'[AI_AGENT]: Keyingi sprint vazifalari yaratilmoqda...' },
+      { cls:'tl-ok',    text:'[AI_AGENT]: 12 ta vazifa navbatda            [OK]' },
+      { cls:'tl-sys',   text:'[CRON]: Zaxira nusxa rejalashtirildi 03:00 UTC' },
+      { cls:'tl-ok',    text:'[CRON]: Ish ro'yxatdan o'tdi               [OK]' },
+      { cls:'tl-info',  text:'[HOLAT]: Barcha tizimlar normal. Agent ishlayapti.' },
       { cls:'tl-dim',   text:'──────────────────────────────────' },
     ];
 
@@ -626,7 +626,7 @@
     btn.addEventListener('click', () => {
       if (btxt) {
         const orig = btxt.textContent;
-        btxt.textContent = 'MESSAGE_SENT ✓';
+        btxt.textContent = 'XABAR_YUBORILDI ✓';
         btn.style.background = '#39ff14';
         btn.style.color = '#030609';
         setTimeout(() => {
