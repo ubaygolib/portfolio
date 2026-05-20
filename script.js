@@ -58,7 +58,7 @@
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
 
-    let W, H, nodes = [], edges = [], mouse = { x: W/2, y: H/2 };
+    let W, H, nodes = [], edges = [], mouse = { x: 0, y: 0 };
     const NODE_COUNT = 80;
     const CONNECT_DIST = 160;
     const MOUSE_DIST = 220;
@@ -96,8 +96,10 @@
     function render() {
       ctx.clearRect(0, 0, W, H);
 
-      // Subtle gradient overlay
-      const grad = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, MOUSE_DIST * 1.5);
+      // Subtle gradient overlay — guard against NaN before canvas init
+      const mx = isFinite(mouse.x) ? mouse.x : W / 2;
+      const my = isFinite(mouse.y) ? mouse.y : H / 2;
+      const grad = ctx.createRadialGradient(mx, my, 0, mx, my, MOUSE_DIST * 1.5);
       grad.addColorStop(0,   'rgba(0,245,255,0.025)');
       grad.addColorStop(1,   'rgba(0,0,0,0)');
       ctx.fillStyle = grad;
